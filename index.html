@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Make sure to include Font Awesome in <head> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Shiela Portfolio Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f9;
+            color: #333;
+        }
+
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(180deg, #b6741e, #8a5a15);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .sidebar h2 {
+            margin: 10px 0 25px 0;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-align: center;
+            border-bottom: 2px solid #4e4d4db6;
+            padding-bottom: 8px;
+        }
+
+        .sidebar nav {
+            width: 100%;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-size: 15px;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(5px);
+        }
+
+        .sidebar a i {
+            margin-right: 10px;
+            font-size: 16px;
+        }
+
+        /* Main content */
+        .main {
+            margin-left: 270px;
+            padding: 40px 30px;
+            flex: 1;
+        }
+
+        .card {
+            background: #fff;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        .card h2 {
+            font-size: 22px;
+            margin-bottom: 18px;
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        .mypic {
+            height: 160px;
+            width: 160px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 20px auto;
+            border: 4px solid #b6741e;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .mypic:hover {
+            transform: scale(1.08);
+        }
+
+        #about p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #555;
+            margin: 0 auto 15px auto;
+            max-width: 750px;
+            text-align: justify;
+        }
+
+        #about p b {
+            color: #b6741e;
+        }
+
+        ul {
+            padding-left: 20px;
+            line-height: 1.8;
+        }
+
+        #contact p {
+            font-size: 15px;
+            margin: 8px 0;
+        }
+
+        #contact a {
+            color: #5b99d6;
+            text-decoration: none;
+        }
+
+        #contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main {
+                margin-left: 200px;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 15px;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 20px 15px;
+            }
+        }
+    </style>
+    <!-- FontAwesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- <img src="/images/me.jpg" alt="Profile" class="profile-pic"> -->
+            <h2>Shiela Marie Verona</h2>
+            <nav class="navbar">
+                <a href="#about"><i class="fas fa-user"></i> About Me</a>
+                <a href="#projects"><i class="fas fa-folder-open"></i> Projects</a>
+                <a href="#skills"><i class="fas fa-code"></i> Skills</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </nav>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="main">
+            <div id="about" class="card">
+                <img src="/images/me.jpg" alt="Shiela Marie Verona" class="mypic">
+                <h2>About Me</h2>
+                <p>Hello! I’m <b>Shiela Marie C. Verona</b> from Brgy. Odiong, Javier, Leyte.
+                    I am a recent graduate who is passionate about <b>web design, web development, and technology</b>.
+                    I love exploring how websites and applications work, and I enjoy creating simple, clean, and
+                    user-friendly
+                    designs.</p>
+
+                <p>During my studies, I worked on school projects that introduced me to
+                    <b>HTML, CSS, JavaScript, PHP, and Laravel</b>.
+                </p>
+
+                <p>I may not have professional experience yet, but I am eager to learn,
+                    improve my skills, and grow as a developer.
+                    My goal is to start a career where I can apply what I’ve learned,
+                    gain hands-on experience, and contribute to meaningful projects.</p>
+
+                <p>Aside from coding, I enjoy discovering new technologies,
+                    experimenting with creative designs, and continuously learning to improve myself.</p>
+            </div>
+
+            <div id="projects" class="card">
+                <h2>Projects</h2>
+                <ul>
+                    <li>ISP Subscriber Management System</li>
+                    <li>Unity 2D Platformer Game</li>
+                    <li>Snake Game with Sound Effects</li>
+                </ul>
+            </div>
+
+            <div id="skills" class="card">
+                <h2>Skills</h2>
+                <p>💻 Web Development (HTML, CSS, JavaScript, PHP, Laravel)</p>
+                <p>🎮 Unity Game Development</p>
+                <p>📊 Data Analysis (Python, MATLAB)</p>
+            </div>
+
+            <div id="contact" class="card">
+                <h2>Contact</h2>
+                <p>Email: <a href="mailto:shielamarieverona46@gmail.com">shielamarieverona46@gmail.com</a></p>
+                <p>LinkedIn: <a href="https://linkedin.com/in/shiela-marie-verona"
+                        target="_blank">linkedin.com/in/shiela-marie-verona</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
