@@ -36,6 +36,8 @@
       bottom: 0;
       left: 0;
       box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+      z-index: 999;
     }
 
     .profile-pic {
@@ -88,6 +90,7 @@
       margin-left: 270px;
       padding: 40px 30px;
       flex: 1;
+      width: 100%;
     }
 
     .card {
@@ -159,19 +162,24 @@
       text-decoration: underline;
     }
 
-    /* Responsive Styles */
-    @media (max-width: 1024px) {
-      .main {
-        margin-left: 230px;
-        padding: 20px;
-      }
+    /* Menu button for mobile */
+    .menu-toggle {
+      display: none;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      background: #b6741e;
+      border: none;
+      color: white;
+      font-size: 22px;
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 1000;
+      cursor: pointer;
     }
 
+    /* Responsive Styles */
     @media (max-width: 768px) {
-      .sidebar {
-        width: 200px;
-      }
-
       .main {
         margin-left: 200px;
         padding: 20px;
@@ -184,16 +192,16 @@
     }
 
     @media (max-width: 600px) {
-      .sidebar {
-        position: relative;
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 15px;
+      .menu-toggle {
+        display: block;
       }
 
-      .sidebar h2 {
-        display: none;
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.active {
+        transform: translateX(0);
       }
 
       .main {
@@ -214,6 +222,9 @@
 </head>
 
 <body>
+  <!-- Hamburger Menu Button -->
+  <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+
   <div class="dashboard">
     <!-- Sidebar -->
     <div class="sidebar">
@@ -272,6 +283,16 @@
       </div>
     </div>
   </div>
+
+  <!-- JavaScript for Toggle -->
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    toggle.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+  </script>
 </body>
 
 </html>
