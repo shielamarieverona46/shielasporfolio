@@ -393,3 +393,57 @@
  .contact-item:hover a {
      color: #007bff;
  }
+/* Responsive adjustments for contact card */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* single column layout */
+        gap: 12px;
+    }
+
+    .contact-item {
+        font-size: 0.95rem;
+        gap: 8px;
+        justify-content: center; /* center items */
+        flex-wrap: wrap; /* allow wrapping if necessary */
+    }
+
+    .contact-item i {
+        font-size: 1.2rem;
+    }
+
+    .contact-card {
+        padding: 20px;
+    }
+
+    .contact-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .contact-card p {
+        font-size: 0.95rem;
+    }
+}
+
+/* Extra small screens (<480px) */
+@media (max-width: 480px) {
+    .contact-grid {
+        gap: 10px;
+    }
+
+    .contact-item {
+        font-size: 0.9rem;
+        gap: 6px;
+    }
+
+    .contact-item i {
+        font-size: 1rem;
+    }
+
+    .contact-card h2 {
+        font-size: 1.3rem;
+    }
+
+    .contact-card p {
+        font-size: 0.9rem;
+    }
+}
