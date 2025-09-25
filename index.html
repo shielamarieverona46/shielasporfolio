@@ -11,404 +11,9 @@
         rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 
-    <style>
-        body {
-            margin: 0;
-            font-family: "Poppins", sans-serif;
-            background: #0e0e0e;
-            color: #f4f4f4;
-            overflow-x: hidden;
-        }
-
-        .dashboard {
-            display: flex;
-            min-height: 100vh;
-            flex-wrap: wrap;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 240px;
-            background: linear-gradient(180deg, #2c3e50, #34495e);
-            color: #fff;
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
-        }
-
-        .sidebar-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 40px;
-            text-align: center;
-            letter-spacing: 1px;
-            color: #f1c40f; /* gold highlight */
-        }
-
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .sidebar-nav a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #ecf0f1;
-            text-decoration: none;
-            font-size: 1rem;
-            padding: 12px 15px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-nav a i {
-            font-size: 1.2rem;
-            color: #f1c40f; /* gold icons */
-            transition: transform 0.3s;
-        }
-
-        .sidebar-nav a:hover {
-            background: rgba(241, 196, 15, 0.1);
-            color: #f1c40f;
-            transform: translateX(5px);
-        }
-
-        .sidebar-nav a:hover i {
-            transform: scale(1.2);
-            color: #f39c12;
-        }
-
-
-        /* Main */
-        .main {
-            margin-left: 270px;
-            padding: 50px 30px;
-            flex: 1;
-            width: 100%;
-        }
-
-        .card {
-            background: #1c1c1c;
-            padding: 30px;
-            margin-bottom: 35px;
-            border-radius: 14px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(40px);
-
-        }
-
-        .card.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
-        }
-
-        .card h2 {
-            font-family: "Playfair Display", serif;
-            font-size: 24px;
-            margin-bottom: 18px;
-            color: #d4af37;
-            border-bottom: 2px solid #333;
-            padding-bottom: 8px;
-        }
-
-        /* Profile Pic */
-        .mypic {
-            height: 160px;
-            width: 160px;
-            border-radius: 50%;
-            display: block;
-            margin: 0 auto 25px auto;
-            border: 5px solid #d4af37;
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
-            transition: transform 0.3s ease;
-        }
-
-        .mypic:hover {
-            transform: scale(1.1) rotate(2deg);
-        }
-
-        #about p {
-            font-size: 16px;
-            line-height: 1.7;
-            color: #ddd;
-            margin: 0 auto 15px auto;
-            max-width: 750px;
-            text-align: justify;
-        }
-
-        #about p b {
-            color: #d4af37;
-        }
-
-        ul {
-            padding-left: 20px;
-            line-height: 1.8;
-        }
-
-        #contact p {
-            font-size: 15px;
-            margin: 8px 0;
-        }
-
-        #contact a {
-            color: #d4af37;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        #contact a:hover {
-            text-decoration: underline;
-        }
-
-        /* Menu button */
-        .menu-toggle {
-            display: none;
-            position: fixed;
-            top: 15px;
-            left: 15px;
-            background: #d4af37;
-            border: none;
-            color: white;
-            font-size: 22px;
-            padding: 10px;
-            border-radius: 6px;
-            z-index: 1000;
-            cursor: pointer;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main {
-                margin-left: 0;
-                padding: 20px;
-            }
-
-            .sidebar {
-                transform: translateX(-100%);
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .mypic {
-                height: 120px;
-                width: 120px;
-            }
-        }
-
-        /* Carousel */
-        .carousel {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-        }
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.20s ease-in-out;
-        }
-
-        .carousel-item {
-            min-width: 100%;
-            box-sizing: border-box;
-            text-align: center;
-            position: relative;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 560px;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Overlay captions */
-        .carousel-item .overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            padding: 15px;
-            border-radius: 0 0 10px 10px;
-            text-align: left;
-        }
-
-        .carousel-item .overlay h3 {
-            margin: 0;
-            font-size: 18px;
-            color: #d4af37;
-        }
-
-        .carousel-item .overlay p {
-            font-size: 14px;
-            margin-top: 5px;
-            line-height: 1.4;
-            color: #ddd;
-        }
-
-        /* Buttons */
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            border: none;
-            font-size: 20px;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: 0.3s;
-            z-index: 2;
-        }
-
-        .carousel-btn:hover {
-            background: rgba(212, 175, 55, 0.8);
-        }
-
-        .prev {
-            left: 15px;
-        }
-
-        .next {
-            right: 15px;
-        }
-
-        /* Dots */
-        .carousel-dots {
-            text-align: center;
-            margin-top: 12px;
-        }
-
-        .carousel-dots button {
-            border: none;
-            width: 10px;
-            height: 10px;
-            margin: 5px;
-            border-radius: 50%;
-            background: #666;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .carousel-dots button.active {
-            background: #d4af37;
-        }
-
-        /*skills*/
-        .skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.skill-item {
-  background: #262626;
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.skill-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
-}
-
-.skill-item i {
-  font-size: 35px;
-  color: #d4af37;
-  margin-bottom: 12px;
-}
-
-.skill-item h4 {
-  margin-bottom: 8px;
-  font-size: 18px;
-  color: #f4f4f4;
-}
-
-
-/*card*/
-.contact-card {
-    text-align: center;
-    padding: 25px;
-    border-radius: 15px;
-    background: #fefefe;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-}
-
-.contact-card h2 {
-    color: #333;
-    margin-bottom: 15px;
-    font-size: 1.8rem;
-}
-
-.contact-card p {
-    color: #666;
-    margin-bottom: 20px;
-    font-size: 1rem;
-}
-
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    justify-items: center;
-}
-
-.contact-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1rem;
-    transition: transform 0.3s, color 0.3s;
-}
-
-.contact-item i {
-    font-size: 1.4rem;
-    color: #007bff;
-}
-
-.contact-item a {
-    color: #444;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.contact-item:hover {
-    transform: translateY(-3px);
-}
-
-.contact-item:hover a {
-    color: #007bff;
-}
-
-
-    </style>
+    
 </head>
 
 <body>
@@ -427,9 +32,9 @@
             </nav>
         </div>
 
-
         <!-- Main -->
         <div class="main">
+            <!-- About Me -->
             <div id="about" class="card">
                 <img src="images/me.jpg" alt="Shiela Marie Verona" class="mypic">
                 <h2>About Me</h2>
@@ -442,27 +47,25 @@
                 </p>
             </div>
 
+            <!-- Projects -->
             <div id="projects" class="card">
                 <h2>Academic Projects</h2>
 
-                <!-- Carousel -->
                 <div class="carousel">
-                    <!-- Track -->
                     <div class="carousel-track">
                         <div class="carousel-item">
-                            <img src="records.png" alt="Records Processing System" class="carouselpic">
+                            <img src="images/records.png" alt="Records Processing System">
                             <div class="overlay">
                                 <h3>Records Processing System</h3>
-                            <p>
-                                A web-based system that allows students to request documents directly
-                                from the Records Office with Messenger integration for inquiries and updates.
-                                <strong>This was our Capstone Project and awarded Best in UI/UX Design.</strong>
-                            </p>
+                                <p>A web-based system that allows students to request documents directly
+                                    from the Records Office with Messenger integration for inquiries and updates.
+                                    <strong>This was our Capstone Project and awarded Best in UI/UX Design.</strong>
+                                </p>
                             </div>
                         </div>
 
                         <div class="carousel-item">
-                            <img src="platform.png" alt="Unity 2D Platformer Game" class="carouselpic">
+                            <img src="images/platform.png" alt="Unity 2D Platformer Game">
                             <div class="overlay">
                                 <h3>Unity 2D Platformer Game</h3>
                                 <p>A fun 2D platformer built with Unity featuring health, enemy AI, and respawn
@@ -471,7 +74,7 @@
                         </div>
 
                         <div class="carousel-item">
-                            <img src="snake.png" alt="Snake Game with Sound Effects" class="carouselpic">
+                            <img src="images/snake.png" alt="Snake Game with Sound Effects">
                             <div class="overlay">
                                 <h3>Snake Game</h3>
                                 <p>A modern twist on the classic Snake game, enhanced with background music and sound
@@ -480,15 +83,14 @@
                         </div>
                     </div>
 
-                    <!-- Navigation buttons -->
                     <button class="carousel-btn prev">&#10094;</button>
                     <button class="carousel-btn next">&#10095;</button>
 
-                    <!-- Dots -->
                     <div class="carousel-dots"></div>
                 </div>
             </div>
 
+            <!-- Skills -->
             <div id="skills" class="card">
                 <h2>Skills</h2>
                 <div class="skills-grid">
@@ -505,7 +107,8 @@
                     <div class="skill-item">
                         <i class="fas fa-image"></i>
                         <h4>Graphic Design</h4>
-                        <p>Creating creative and professional designs using <b>Canva</b> for branding, presentations, and visuals.</p>
+                        <p>Creating professional designs using <b>Canva</b> for branding, presentations, and visuals.
+                        </p>
                     </div>
                     <div class="skill-item">
                         <i class="fas fa-mobile-alt"></i>
@@ -515,17 +118,17 @@
                     <div class="skill-item">
                         <i class="fas fa-file-powerpoint"></i>
                         <h4>Document & Presentation</h4>
-                        <p>Proficient in <b>MS PowerPoint</b> and <b>Word</b> for professional reports, presentations, and documents.
-                        </p>
+                        <p>Proficient in <b>MS PowerPoint</b> and <b>Word</b> for professional reports, presentations,
+                            and documents.</p>
                     </div>
                 </div>
-
             </div>
 
+            <!-- Contact -->
             <div id="contact" class="card contact-card">
                 <h2>Contact Me</h2>
                 <p>Let’s connect! Feel free to reach out through any of the following platforms:</p>
-            
+
                 <div class="contact-grid">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
@@ -538,11 +141,13 @@
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-facebook"></i>
-                        <a href="https://facebook.com/shielamarieverona" target="_blank">facebook.com/shielamarieverona</a>
+                        <a href="https://facebook.com/shielamarieverona"
+                            target="_blank">facebook.com/shielamarieverona</a>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-github"></i>
-                        <a href="https://github.com/shielamarieverona46" target="_blank">github.com/shielamarieverona46</a>
+                        <a href="https://github.com/shielamarieverona46"
+                            target="_blank">github.com/shielamarieverona46</a>
                     </div>
                 </div>
             </div>
@@ -551,7 +156,7 @@
 
     <!-- Script -->
     <script>
-        const toggle = document.querySelector('.menu-toggle');
+        /**const toggle = document.querySelector('.menu-toggle');
         const sidebar = document.querySelector('.sidebar');
         const cards = document.querySelectorAll('.card');
 
@@ -571,7 +176,7 @@
         };
 
         window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('load', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);**/
 
         // Carousel
         const track = document.querySelector(".carousel-track");
@@ -611,7 +216,7 @@
             updateCarousel();
         });
 
-        // Auto-slide every 5s
+        // Auto-slide every 8s
         setInterval(() => {
             currentIndex = (currentIndex + 1) % items.length;
             updateCarousel();
@@ -620,4 +225,3 @@
 </body>
 
 </html>
-
