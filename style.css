@@ -340,56 +340,89 @@
 
 
  /*card*/
- .contact-card {
-     text-align: center;
-     padding: 25px;
-     border-radius: 15px;
-     background: #fefefe;
-     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
- }
+ /* Contact Card */
+.contact-card {
+    text-align: center;
+    padding: 25px;
+    border-radius: 15px;
+    background: #fefefe;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
 
- .contact-card h2 {
-     color: #333;
-     margin-bottom: 15px;
-     font-size: 1.8rem;
- }
+.contact-card h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
 
- .contact-card p {
-     color: #666;
-     margin-bottom: 20px;
-     font-size: 1rem;
- }
+.contact-card p {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
 
- .contact-grid {
-     display: grid;
-     grid-template-columns: 1fr 1fr;
-     gap: 15px;
-     justify-items: center;
- }
+/* Grid layout */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    justify-items: center;
+}
 
- .contact-item {
-     display: flex;
-     align-items: center;
-     gap: 10px;
-     font-size: 1rem;
-     transition: transform 0.3s, color 0.3s;
- }
+/* Individual contact items */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    transition: transform 0.3s, color 0.3s;
+}
 
- .contact-item i {
-     font-size: 1.4rem;
-     color: #007bff;
- }
+.contact-item i {
+    font-size: 1.4rem;
+    color: #007bff;
+}
 
- .contact-item a {
-     color: #444;
-     text-decoration: none;
-     transition: color 0.3s;
- }
+.contact-item a {
+    color: #444;
+    text-decoration: none;
+    transition: color 0.3s;
+}
 
- .contact-item:hover {
-     transform: translateY(-3px);
- }
+.contact-item:hover {
+    transform: translateY(-3px);
+}
 
- .contact-item:hover a {
-     color: #007bff;
- }
+.contact-item:hover a {
+    color: #007bff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* single column on smaller screens */
+        gap: 10px;
+    }
+
+    .contact-item {
+        font-size: 0.95rem;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .contact-item i {
+        font-size: 1.2rem;
+    }
+
+    .contact-card {
+        padding: 20px;
+    }
+
+    .contact-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .contact-card p {
+        font-size: 0.95rem;
+    }
+}
