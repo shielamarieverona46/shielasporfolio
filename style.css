@@ -429,6 +429,7 @@
 
      .menu-toggle {
          display: block;
+         z-index: 1100; /* above sidebar for easy click */
      }
 
      .mypic {
