@@ -144,81 +144,93 @@
 
     <!-- Script -->
     <script>
-        const toggle = document.querySelector('.menu-toggle');
-        const sidebar = document.querySelector('.sidebar');
-        const main = document.querySelector('.main'); // main content container
-        const cards = document.querySelectorAll('.card');
+    const toggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const main = document.querySelector('.main'); 
+    const cards = document.querySelectorAll('.card');
 
-        // Toggle sidebar
-        toggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-        });
+    // Toggle sidebar on hamburger click
+    toggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+    });
 
-        // Close sidebar when clicking main content (mobile)
-        main.addEventListener('click', () => {
+    // Close sidebar when clicking main content
+    main.addEventListener('click', () => {
+        if (sidebar.classList.contains('active')) {
+            sidebar.classList.remove('active');
+        }
+    });
+
+    // Close sidebar when clicking a sidebar link
+    const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', () => {
             if (sidebar.classList.contains('active')) {
                 sidebar.classList.remove('active');
             }
         });
+    });
 
-        // Scroll animation
-        const revealOnScroll = () => {
-            const triggerBottom = window.innerHeight * 0.85;
-            cards.forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                if (cardTop < triggerBottom) {
-                    card.classList.add('show');
-                }
-            });
-        };
-
-        window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('load', revealOnScroll);
-
-        // Carousel
-        const track = document.querySelector(".carousel-track");
-        const items = Array.from(track.children);
-        const nextButton = document.querySelector(".next");
-        const prevButton = document.querySelector(".prev");
-        const dotsNav = document.querySelector(".carousel-dots");
-
-        let currentIndex = 0;
-
-        // Create dots
-        items.forEach((_, i) => {
-            const dot = document.createElement("button");
-            if (i === 0) dot.classList.add("active");
-            dotsNav.appendChild(dot);
-            dot.addEventListener("click", () => {
-                currentIndex = i;
-                updateCarousel();
-            });
+    // Scroll animation
+    const revealOnScroll = () => {
+        const triggerBottom = window.innerHeight * 0.85;
+        cards.forEach(card => {
+            const cardTop = card.getBoundingClientRect().top;
+            if (cardTop < triggerBottom) {
+                card.classList.add('show');
+            }
         });
+    };
 
-        const dots = Array.from(dotsNav.children);
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
 
-        function updateCarousel() {
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            dots.forEach(dot => dot.classList.remove("active"));
-            dots[currentIndex].classList.add("active");
-        }
+    // Carousel
+    const track = document.querySelector(".carousel-track");
+    const items = Array.from(track.children);
+    const nextButton = document.querySelector(".next");
+    const prevButton = document.querySelector(".prev");
+    const dotsNav = document.querySelector(".carousel-dots");
 
-        nextButton.addEventListener("click", () => {
-            currentIndex = (currentIndex + 1) % items.length;
+    let currentIndex = 0;
+
+    // Create dots
+    items.forEach((_, i) => {
+        const dot = document.createElement("button");
+        if (i === 0) dot.classList.add("active");
+        dotsNav.appendChild(dot);
+        dot.addEventListener("click", () => {
+            currentIndex = i;
             updateCarousel();
         });
+    });
 
-        prevButton.addEventListener("click", () => {
-            currentIndex = (currentIndex - 1 + items.length) % items.length;
-            updateCarousel();
-        });
+    const dots = Array.from(dotsNav.children);
 
-        // Auto-slide every 8s
-        setInterval(() => {
-            currentIndex = (currentIndex + 1) % items.length;
-            updateCarousel();
-        }, 8000);
-    </script>
+    function updateCarousel() {
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach(dot => dot.classList.remove("active"));
+        dots[currentIndex].classList.add("active");
+    }
+
+    nextButton.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % items.length;
+        updateCarousel();
+    });
+
+    prevButton.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        updateCarousel();
+    });
+
+    // Auto-slide every 8s
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % items.length;
+        updateCarousel();
+    }, 8000);
+</script>
+
 </body>
 
 </html>
+
