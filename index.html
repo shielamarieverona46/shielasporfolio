@@ -4,16 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <title>Shiela Portfolio Dashboard</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
   <style>
     body {
       margin: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: #f4f6f9;
-      color: #333;
+      font-family: "Poppins", sans-serif;
+      background: #0e0e0e;
+      color: #f4f4f4;
+      overflow-x: hidden;
     }
 
     .dashboard {
@@ -25,7 +28,7 @@
     /* Sidebar */
     .sidebar {
       width: 250px;
-      background: linear-gradient(180deg, #b6741e, #8a5a15);
+      background: linear-gradient(180deg, #d4af37, #8a5a15);
       color: white;
       display: flex;
       flex-direction: column;
@@ -35,28 +38,19 @@
       top: 0;
       bottom: 0;
       left: 0;
-      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s ease;
+      box-shadow: 2px 0 15px rgba(0, 0, 0, 0.4);
       z-index: 999;
-    }
-
-    .profile-pic {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 3px solid #fff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      margin-bottom: 15px;
-      object-fit: cover;
+      transition: transform 0.3s ease;
     }
 
     .sidebar h2 {
-      margin: 10px 0 25px 0;
-      font-size: 20px;
+      margin: 15px 0 25px 0;
+      font-family: "Playfair Display", serif;
+      font-size: 22px;
       font-weight: 600;
       text-align: center;
       border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-      padding-bottom: 8px;
+      padding-bottom: 10px;
     }
 
     .sidebar nav {
@@ -66,81 +60,91 @@
     .sidebar a {
       color: white;
       text-decoration: none;
-      padding: 12px 15px;
-      margin: 8px 0;
-      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 10px 0;
+      border-radius: 8px;
       display: flex;
       align-items: center;
+      font-size: 16px;
       transition: all 0.3s ease;
-      font-size: 15px;
     }
 
     .sidebar a:hover {
       background: rgba(255, 255, 255, 0.15);
-      transform: translateX(5px);
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
+      transform: translateX(6px);
     }
 
     .sidebar a i {
-      margin-right: 10px;
-      font-size: 16px;
+      margin-right: 12px;
+      font-size: 18px;
     }
 
-    /* Main content */
+    /* Main */
     .main {
       margin-left: 270px;
-      padding: 40px 30px;
+      padding: 50px 30px;
       flex: 1;
       width: 100%;
     }
 
     .card {
-      background: #fff;
+      background: #1c1c1c;
       padding: 30px;
-      margin-bottom: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      margin-bottom: 35px;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(212, 175, 55, 0.3);
     }
 
     .card h2 {
-      font-size: 22px;
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
       margin-bottom: 18px;
-      color: #2c3e50;
-      border-bottom: 2px solid #eee;
+      color: #d4af37;
+      border-bottom: 2px solid #333;
       padding-bottom: 8px;
     }
 
+    /* Profile Pic */
     .mypic {
-      height: 140px;
-      width: 140px;
+      height: 160px;
+      width: 160px;
       border-radius: 50%;
       display: block;
-      margin: 0 auto 20px auto;
-      border: 4px solid #b6741e;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      margin: 0 auto 25px auto;
+      border: 5px solid #d4af37;
+      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
       transition: transform 0.3s ease;
     }
 
     .mypic:hover {
-      transform: scale(1.08);
+      transform: scale(1.1) rotate(2deg);
     }
 
     #about p {
       font-size: 16px;
       line-height: 1.7;
-      color: #555;
+      color: #ddd;
       margin: 0 auto 15px auto;
       max-width: 750px;
       text-align: justify;
     }
 
     #about p b {
-      color: #b6741e;
+      color: #d4af37;
     }
 
     ul {
@@ -154,46 +158,36 @@
     }
 
     #contact a {
-      color: #5b99d6;
+      color: #d4af37;
       text-decoration: none;
+      font-weight: 500;
     }
 
     #contact a:hover {
       text-decoration: underline;
     }
 
-    /* Menu button for mobile */
+    /* Menu button */
     .menu-toggle {
       display: none;
       position: fixed;
       top: 15px;
       left: 15px;
-      background: #b6741e;
+      background: #d4af37;
       border: none;
       color: white;
       font-size: 22px;
       padding: 10px;
-      border-radius: 5px;
+      border-radius: 6px;
       z-index: 1000;
       cursor: pointer;
     }
 
-    /* Responsive Styles */
+    /* Responsive */
     @media (max-width: 768px) {
       .main {
-        margin-left: 200px;
+        margin-left: 0;
         padding: 20px;
-      }
-
-      .mypic {
-        height: 120px;
-        width: 120px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .menu-toggle {
-        display: block;
       }
 
       .sidebar {
@@ -204,32 +198,27 @@
         transform: translateX(0);
       }
 
-      .main {
-        margin-left: 0;
-        padding: 20px 15px;
-      }
-
-      .card {
-        padding: 20px;
+      .menu-toggle {
+        display: block;
       }
 
       .mypic {
-        height: 100px;
-        width: 100px;
+        height: 120px;
+        width: 120px;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- Hamburger Menu Button -->
+  <!-- Hamburger -->
   <button class="menu-toggle"><i class="fas fa-bars"></i></button>
 
   <div class="dashboard">
     <!-- Sidebar -->
     <div class="sidebar">
       <h2>Shiela Marie Verona</h2>
-      <nav class="navbar">
+      <nav>
         <a href="#about"><i class="fas fa-user"></i> About Me</a>
         <a href="#projects"><i class="fas fa-folder-open"></i> Projects</a>
         <a href="#skills"><i class="fas fa-code"></i> Skills</a>
@@ -237,27 +226,16 @@
       </nav>
     </div>
 
-    <!-- Main Content -->
+    <!-- Main -->
     <div class="main">
       <div id="about" class="card">
         <img src="images/me.jpg" alt="Shiela Marie Verona" class="mypic">
         <h2>About Me</h2>
         <p>Hello! I’m <b>Shiela Marie C. Verona</b> from Brgy. Odiong, Javier, Leyte.
-          I am a recent graduate who is passionate about <b>web design, web development, and technology</b>.
-          I love exploring how websites and applications work, and I enjoy creating simple, clean, and user-friendly
-          designs.</p>
-
-        <p>During my studies, I worked on school projects that introduced me to
-          <b>HTML, CSS, JavaScript, PHP, and Laravel</b>.
+          I am a passionate <b>Web Designer & Developer</b> eager to create stunning and functional websites.
         </p>
-
-        <p>I may not have professional experience yet, but I am eager to learn,
-          improve my skills, and grow as a developer.
-          My goal is to start a career where I can apply what I’ve learned,
-          gain hands-on experience, and contribute to meaningful projects.</p>
-
-        <p>Aside from coding, I enjoy discovering new technologies,
-          experimenting with creative designs, and continuously learning to improve myself.</p>
+        <p>During my studies, I gained skills in <b>HTML, CSS, JavaScript, PHP, and Laravel</b>, and developed school projects showcasing my creativity and logic.</p>
+        <p>My goal is to grow as a developer, contribute to meaningful projects, and keep learning every day.</p>
       </div>
 
       <div id="projects" class="card">
@@ -284,16 +262,30 @@
     </div>
   </div>
 
-  <!-- JavaScript for Toggle -->
+  <!-- Script -->
   <script>
     const toggle = document.querySelector('.menu-toggle');
     const sidebar = document.querySelector('.sidebar');
+    const cards = document.querySelectorAll('.card');
 
     toggle.addEventListener('click', () => {
       sidebar.classList.toggle('active');
     });
+
+    // Scroll animation
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.85;
+      cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if (cardTop < triggerBottom) {
+          card.classList.add('show');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
   </script>
 </body>
 
 </html>
-
