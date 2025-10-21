@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,6 +25,7 @@
                 <a href="#about"><i class="fas fa-user"></i><span>About Me</span></a>
                 <a href="#projects"><i class="fas fa-folder-open"></i><span>Projects</span></a>
                 <a href="#skills"><i class="fas fa-code"></i><span>Skills</span></a>
+                <a href="#seminars"><i class="fas fa-chalkboard-teacher"></i><span>Seminars</span></a>
                 <a href="#contact"><i class="fas fa-envelope"></i><span>Contact</span></a>
             </nav>
         </div>
@@ -40,7 +40,8 @@
                     I am a passionate <b>Web Designer & Developer</b> eager to create stunning and functional websites.
                 </p>
                 <p>During my studies, I gained skills in <b>HTML, CSS, JavaScript, PHP, and Laravel</b>, and developed
-                    school projects showcasing my creativity and logic.</p>
+                    school projects showcasing my creativity and logic. I am also capable of handling and organizing data efficiently, 
+                     making me adaptable to both technical and data-related tasks.</p>
                 <p>My goal is to grow as a developer, contribute to meaningful projects, and keep learning every day.
                 </p>
             </div>
@@ -122,6 +123,31 @@
                 </div>
             </div>
 
+            <!-- Seminars -->
+            <div id="seminars" class="card">
+                <h2>Seminars & Trainings</h2>
+
+                <div class="carousel seminars-carousel">
+                    <div class="carousel-track">
+                        <div class="carousel-item">
+                            <img src="images/s1.jpg" alt="Seminar 1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="images/s2.jpg" alt="Seminar 2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="images/s3.jpg" alt="Seminar 3">
+                        </div>
+                    </div>
+ 
+                    <button class="carousel-btn prev seminar-prev">&#10094;</button>
+                    <button class="carousel-btn next seminar-next">&#10095;</button>
+
+                    <div class="carousel-dots seminar-dots"></div>
+                </div>
+            </div>
+
+
             <!-- Contact -->
             <div id="contact" class="card contact-card">
                 <h2>Contact Me</h2>
@@ -137,6 +163,10 @@
                         <a href="https://facebook.com/shielamarieverona"
                             target="_blank">facebook.com/shielamarieverona</a>
                     </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://linked.in/shiela-marie-verona" target="_blank">linked.in/shielamarieverona</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -144,93 +174,140 @@
 
     <!-- Script -->
     <script>
-    const toggle = document.querySelector('.menu-toggle');
-    const sidebar = document.querySelector('.sidebar');
-    const main = document.querySelector('.main'); 
-    const cards = document.querySelectorAll('.card');
+        const toggle = document.querySelector('.menu-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const main = document.querySelector('.main');
+        const cards = document.querySelectorAll('.card');
 
-    // Toggle sidebar on hamburger click
-    toggle.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-    });
+        // Toggle sidebar on hamburger click
+        toggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
 
-    // Close sidebar when clicking main content
-    main.addEventListener('click', () => {
-        if (sidebar.classList.contains('active')) {
-            sidebar.classList.remove('active');
-        }
-    });
-
-    // Close sidebar when clicking a sidebar link
-    const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
-    sidebarLinks.forEach(link => {
-        link.addEventListener('click', () => {
+        // Close sidebar when clicking main content
+        main.addEventListener('click', () => {
             if (sidebar.classList.contains('active')) {
                 sidebar.classList.remove('active');
             }
         });
-    });
 
-    // Scroll animation
-    const revealOnScroll = () => {
-        const triggerBottom = window.innerHeight * 0.85;
-        cards.forEach(card => {
-            const cardTop = card.getBoundingClientRect().top;
-            if (cardTop < triggerBottom) {
-                card.classList.add('show');
-            }
+        // Close sidebar when clicking a sidebar link
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (sidebar.classList.contains('active')) {
+                    sidebar.classList.remove('active');
+                }
+            });
         });
-    };
 
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll);
+        // Scroll animation
+        const revealOnScroll = () => {
+            const triggerBottom = window.innerHeight * 0.85;
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if (cardTop < triggerBottom) {
+                    card.classList.add('show');
+                }
+            });
+        };
 
-    // Carousel
-    const track = document.querySelector(".carousel-track");
-    const items = Array.from(track.children);
-    const nextButton = document.querySelector(".next");
-    const prevButton = document.querySelector(".prev");
-    const dotsNav = document.querySelector(".carousel-dots");
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
 
-    let currentIndex = 0;
+        // Carousel
+        const track = document.querySelector(".carousel-track");
+        const items = Array.from(track.children);
+        const nextButton = document.querySelector(".next");
+        const prevButton = document.querySelector(".prev");
+        const dotsNav = document.querySelector(".carousel-dots");
 
-    // Create dots
-    items.forEach((_, i) => {
-        const dot = document.createElement("button");
-        if (i === 0) dot.classList.add("active");
-        dotsNav.appendChild(dot);
-        dot.addEventListener("click", () => {
-            currentIndex = i;
+        let currentIndex = 0;
+
+        // Create dots
+        items.forEach((_, i) => {
+            const dot = document.createElement("button");
+            if (i === 0) dot.classList.add("active");
+            dotsNav.appendChild(dot);
+            dot.addEventListener("click", () => {
+                currentIndex = i;
+                updateCarousel();
+            });
+        });
+
+        const dots = Array.from(dotsNav.children);
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach(dot => dot.classList.remove("active"));
+            dots[currentIndex].classList.add("active");
+        }
+
+        nextButton.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % items.length;
             updateCarousel();
         });
-    });
 
-    const dots = Array.from(dotsNav.children);
+        prevButton.addEventListener("click", () => {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            updateCarousel();
+        });
 
-    function updateCarousel() {
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
-        dots.forEach(dot => dot.classList.remove("active"));
-        dots[currentIndex].classList.add("active");
-    }
+        // Auto-slide every 8s
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateCarousel();
+        }, 8000);
 
-    nextButton.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % items.length;
-        updateCarousel();
-    });
 
-    prevButton.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + items.length) % items.length;
-        updateCarousel();
-    });
+        //seminar carousel
 
-    // Auto-slide every 8s
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % items.length;
-        updateCarousel();
-    }, 8000);
-</script>
+        // Seminars Carousel
+            const seminarTrack = document.querySelector(".seminars-carousel .carousel-track");
+            const seminarItems = Array.from(seminarTrack.children);
+            const seminarNextButton = document.querySelector(".seminar-next");
+            const seminarPrevButton = document.querySelector(".seminar-prev");
+            const seminarDotsNav = document.querySelector(".seminar-dots");
+
+            let seminarIndex = 0;
+
+            // Create dots
+            seminarItems.forEach((_, i) => {
+                const dot = document.createElement("button");
+                if (i === 0) dot.classList.add("active");
+                seminarDotsNav.appendChild(dot);
+                dot.addEventListener("click", () => {
+                    seminarIndex = i;
+                    updateSeminarCarousel();
+                });
+            });
+
+            const seminarDots = Array.from(seminarDotsNav.children);
+
+            function updateSeminarCarousel() {
+                seminarTrack.style.transform = `translateX(-${seminarIndex * 100}%)`;
+                seminarDots.forEach(dot => dot.classList.remove("active"));
+                seminarDots[seminarIndex].classList.add("active");
+            }
+
+            seminarNextButton.addEventListener("click", () => {
+                seminarIndex = (seminarIndex + 1) % seminarItems.length;
+                updateSeminarCarousel();
+            });
+
+            seminarPrevButton.addEventListener("click", () => {
+                seminarIndex = (seminarIndex - 1 + seminarItems.length) % seminarItems.length;
+                updateSeminarCarousel();
+            });
+
+            // Auto-slide every 8s
+            setInterval(() => {
+                seminarIndex = (seminarIndex + 1) % seminarItems.length;
+                updateSeminarCarousel();
+            }, 8000);
+
+    </script>
 
 </body>
 
 </html>
-
